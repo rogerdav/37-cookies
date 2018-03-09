@@ -12,7 +12,7 @@ class Landing extends React.Component {
 
   redirect(path) {
     
-     this.props.history.push(path);
+     this.props.history.replace(path);
   }
 
   render() {
@@ -27,13 +27,18 @@ class Landing extends React.Component {
         <AuthForm
           auth={params.auth}
           redirect={this.redirect}
+          history={this.props.history}
           onComplete={onComplete}/>
       </div>
     )
   }
 }
 
-let mapStateToProps = () => ({})
+let mapStateToProps = state => {
+  return ({
+    profile: state.profile,
+  });
+};
 let mapDispatchToProps = dispatch => ({
   signup: user => dispatch(signupRequest(user)),
   signin: user => dispatch(signinRequest(user)),
